@@ -193,7 +193,7 @@ $longopts  = array(
 );
 
 $options = getopt("", $longopts);
-$term = $options['term'] ?: $GLOBALS['DEFAULT_TERM'];
-$location = $options['location'] ?: $GLOBALS['DEFAULT_LOCATION'];
+$term = $_GET['term'] ?: $GLOBALS['DEFAULT_TERM'];
+$location = $_GET['location'] ?: $GLOBALS['DEFAULT_LOCATION'];
 query_api($term, $location);
 ?>

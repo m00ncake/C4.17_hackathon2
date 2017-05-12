@@ -1,6 +1,7 @@
 body {
     background-image: url("images/city_background_05.jpg");
     background-size: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 section {
     background-color: rgba(140, 165, 177, 0.30);
