@@ -25,7 +25,7 @@ section {
     background-color: #8e0f0f;
     height: 34vh;
     margin-bottom: 0.3vh;
-    width: 50vw;
+    width: 40vw;
 }
 #weather {
     background-image: url("images/weather_Clear_Sky_01.jpg");
@@ -58,4 +58,24 @@ section {
     text-align: center;
     margin: auto;
     margin-top: 2%;
+}
+.back-button{
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    left: 5%;
+}
+.itinerary-button{
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    width: 100%;
+}
+button:focus {
+    outline:0;
+}
+#button-container{
+    height: 34vh;
+    width: 9vw;
+    padding: 0;
 }

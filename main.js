@@ -8,6 +8,12 @@ var locations =[];
 $(document).ready(function() {
     $("#main-page").hide(500);
 
+    $('.back-button').click(function () {
+        console.log("It worked");
+        $("#main-page").hide(1100);
+        $("#opening-page").show(1000);
+    });
+
     $('.submit').click(function () {
         console.log('click initiated');
         $("#opening-page").hide(1000);
