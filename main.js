@@ -54,14 +54,6 @@ $(document).ready(function() {
                 food_result = response;
                 console.log('it worked');
                 displayFoodList();
-                locations = [
-                    {title: global_result[0].name, location: {lat: global_result[0].coordinates.latitude, lng: global_result[0].coordinates.longitude}},
-                    {title: global_result[1].name, location: {lat: global_result[1].coordinates.latitude, lng: global_result[1].coordinates.longitude}},
-                    {title: global_result[2].name, location: {lat: global_result[2].coordinates.latitude, lng: global_result[2].coordinates.longitude}},
-                    {title: food_result[0].name, location: {lat: food_result[0].coordinates.latitude, lng: food_result[0].coordinates.longitude}},
-                    {title: food_result[1].name, location: {lat: food_result[1].coordinates.latitude, lng: food_result[1].coordinates.longitude}},
-                    {title: food_result[2].name, location: {lat: food_result[2].coordinates.latitude, lng: food_result[2].coordinates.longitude}}
-                ];
                 initMap();
             },
             error:function(response){
@@ -87,7 +79,7 @@ $(document).ready(function() {
                 var cityName = response.name;
                 var cityWeather = response.weather[0].description;
                 var weatherIcon = response.weather[0].icon;
-                var cityTemp = response.main.temp;
+                var cityTemp = Math.floor(response.main.temp);
                 console.log(cityName, cityWeather, weatherIcon, cityTemp);
                 updateWeather(cityName, cityWeather, weatherIcon, cityTemp);
             },
@@ -239,12 +231,15 @@ function initMap() {
  */
 function displayAcvtivtyList(){
     for(i=0; i<=2; i++){
-        var activity = global_result[i].image_url;
+        var e = Math.floor(Math.random() * global_result.length);
+        var activity = global_result[e].image_url;
         $(".activity" + i).css("background-image","url(" + activity + ")");
-        var name = global_result[i].name;
-        var address = global_result[i].location.address1;
+        var name = global_result[e].name;
+        var address = global_result[e].location.address1;
         console.log(address);
         $(".description" + i).html('<b>' + name + '</b>' +'<br>'+ address);
+        locations.push({title: global_result[e].name, location: {lat: global_result[e].coordinates.latitude, lng: global_result[e].coordinates.longitude}});
+        global_result.splice(e, 1);
     }
 }
 /**
@@ -265,6 +260,8 @@ function displayFoodList(){
         });
         $('.food' + t).css("background-image","url(" + picture + ")");
         $('.food-info' + t).append(infoDiv);
+        locations.push({title: food_result[p].name, location: {lat: food_result[p].coordinates.latitude, lng: food_result[p].coordinates.longitude}});
+        food_result.splice(p, 1);
     }
 }
 /**
@@ -277,13 +274,21 @@ function displayFoodList(){
 function updateWeather(city, weather, icon, temp) {
     var $weather = $("#weather");
     var $city_name = $("<div>").css({"font-size":"30px", "color": "white"}).text(city);
-    var $city_weather = $("<div>").text(weather);
-    var $image = "http://openweathermap.org/img/w/" + icon + ".png";
-    var $city_temp = $("<div>").text(temp);
+    var $city_weather = $("<div>").css({"color": "grey"}).text(weather);
+    // var $image = "http://openweathermap.org/img/w/" + icon + ".png";
+    var $image = "images/" + icon + ".jpg";
+    $weather.css("background-image", "url(" + $image + ")");
     console.log($image);
+    var $city_temp = $("<div>").css({"font-size":"60px", "color": "white"}).text(temp +"°");
     var $weather_icon = $("<img>").attr("src",$image);
+    // switch(icon) {
+    //     case "01d":
+    //         $("#weather").css("background-image", "url('')")
+    //         break;
+    //     case "":
+    // }
     console.log("weather: ",$city_weather,"city Name: ",$city_name,"weather icon: ", $weather_icon);
-    $weather.append($city_name, $city_weather, $weather_icon, $city_temp);
+    $weather.append($city_name, $city_weather, $city_temp);
 }
 
 
