@@ -1,14 +1,26 @@
 body {
     background-image: url("images/city_background_07.jpg");
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
+    font-size: 25px;
 }
 section {
     background-color: rgba(140, 165, 177, 0.30);
 }
+
 #opening-page {
     margin-top: 3vh;
+}
+
+@media screen and (max-width: 767px){
+    #opening-page{
+        width: 100%;
+        margin-top: 40vh;
+    }
 }
 #submit-btn {
     margin-bottom: 3vh;
@@ -30,11 +42,10 @@ section {
 }
 #weather {
     background-image: url("images/weather_Clear_Sky_01.jpg");
-    background-size: 100%;
-    /*height: 34vh;*/
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 29vh;
     width: 15.5vw;
-    /*margin: 0 0.3vw;*/
     /*TODO: figure out how to make this a relative size with bootstrap but make google maps able to draw itself correctly with an unknown size.  Maybe force google maps to redraw after element load?*/
 }
 #buttonsOnPage{
@@ -44,7 +55,7 @@ section {
 }
 #buttonsOnPage button{
     height: 80%;
-    width: 45%;
+    width: 30%;
     /*margin: 0.3vh 0.3vh;*/
     padding: 0;
     margin-left: 3%;
@@ -62,15 +73,18 @@ button:focus {
 
 .activity0, .activity1, .activity2, .description {
     height: 19vh;
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .food0 div, .food1 div, .food2 div {
     height: 19vh;
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .food0, .food1, .food2{
     height: 19vh;
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .page-top{
     width: 70vw;
