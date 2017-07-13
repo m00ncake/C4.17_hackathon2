@@ -28,18 +28,15 @@ function makeFirstCall(){
 }
 
 function ajaxOne(){
-    // var city = $('#city-input').val();
     $.ajax({
         method: 'get',
         dataType: 'json',
-        // url: 'http://localhost:3000/activities/' + city,
         url: 'yelpServer.php',
         data: {
             'location': $('#city-input').val(),
             'term': 'Things to do'
         },
         success: function (response){
-            // activity_result = response;
             data = response;
             modArray();
             ajaxTwo();
@@ -51,18 +48,15 @@ function ajaxOne(){
 }
 
 function ajaxTwo(){
-    // var city = $('#city-input').val();
     $.ajax({
         method:'get',
         dataType: 'json',
-        // url: 'http://localhost:3000/food/' + city,
         url: 'yelpServer.php',
         data: {
             'location': $('#city-input').val(),
             'term': 'Food'
         },
         success: function (response) {
-            // food_result = response;
             data = response;
             modArray();
             displayFoodList();
@@ -374,141 +368,3 @@ function addActivity(){
     $('#main-page').hide();
     $('#itinerary').show();
 }
-
-// function displayAcvtivtyList(){
-//     for(i=0; i<=2; i++){
-//         var e = Math.floor(Math.random() * global_result.length);
-//         var activity = global_result[e].image_url;
-//         $(".activity" + i).css("background-image","url(" + activity + ")");
-//         var name = global_result[e].name;
-//         var address = global_result[e].location.address1;
-//         var type = global_result[e].categories[0].title;
-//         console.log(address);
-//         $(".description" + i).html('<b>' + name + '</b>' +'<br>'+ type + '<br>' + address);
-//         locations.push({title: global_result[e].name, location: {lat: global_result[e].coordinates.latitude, lng: global_result[e].coordinates.longitude}});
-//         global_result.splice(e, 1);
-//     }
-// }
-
-// function displayFoodList(){
-//     for(var t = 0; t < 3; t++){
-//         var p = Math.floor(Math.random() * food_result.length);
-//         var name = food_result[p].name;
-//         var address = food_result[p].location.address1;
-//         var phone = food_result[p].display_phone;
-//         var price = food_result[p].price;
-//         var rating = food_result[p].rating;
-//         var type = food_result[p].categories[0].title;
-//         var picture = food_result[p].image_url;
-//         var infoDiv = $('<div>',{
-//             html: ('<b>' + name + '</b>' + '<br>' + price + " - " + rating + ' ' + '&#x2605' + '<br>' + type + '<br>' + address + '<br>' + phone)
-//         });
-//         $('.food' + t).css("background-image","url(" + picture + ")");
-//         $('.food-info' + t).append(infoDiv);
-//         locations.push({title: food_result[p].name, location: {lat: food_result[p].coordinates.latitude, lng: food_result[p].coordinates.longitude}});
-//         food_result.splice(p, 1);
-//         if(food_result.length === 0){
-//             morePlans = false;
-//         }
-//     }
-// }
-
-// $(document).ready(function() {
-//     $("#main-page").hide(500);
-//     $("#changeCity").click(changeCity);
-//     $("#previousPlans").click(newPlans);
-//     $("#nextPlans").click(newPlans);
-//     /**
-//      * set click handler to submit button - AJAX call to Yelp for food data
-//      * set response to food_result variable
-//      * set locations to location array - call initMap function to create map
-//      * set activities
-//      */
-//     $('.submit').click(function () {
-//         $('body').css('background-image', 'url(https://s-media-cache-ak0.pinimg.com/originals/d3/59/1c/d3591c63b81ba14696e290f74743e1de.gif)');
-//         $('section').css('opacity', 0);
-//         console.log('click initiated');
-//         $("#opening-page").hide(1000);
-//         $("#main-page").show(1100);
-//         $.ajax({
-//             method:'get',
-//             dataType: 'json',
-//             url: 'yelpServer.php',
-//             data: {
-//                 'location': $('#city-input').val(),
-//                 'term': 'Things to do'
-//             },
-//             success: function (response) {
-//                 data = response;
-//                 for(var i = 0; i < 10; i++){
-//                     var newArray = [];
-//                     for(var e = 0; e < 3; e++){
-//                         newArray.push(data[e]);
-//                     }
-//                     data.splice(0,3);
-//                     global_result.push(newArray);
-//                 }
-//                 console.log('it worked');
-//                 $.ajax({
-//                     method:'get',
-//                     dataType: 'json',
-//                     url: 'yelpServer.php',
-//                     data: {
-//                         'location': $('#city-input').val(),
-//                         'term': 'Food'
-//                     },
-//                     success: function (response) {
-//                         data = response;
-//                         for(var i = 0; i < 10; i++){
-//                             var newArray = [];
-//                             for(var e = 0; e < 3; e++){
-//                                 newArray.push(data[e]);
-//                             }
-//                             data.splice(0,3);
-//                             food_result.push(newArray);
-//                         }
-//                         console.log('it worked');
-//                         displayFoodList();
-//                         displayAcvtivtyList();
-//                         initMap();
-//                     },
-//                     error:function(response){
-//                         console.log('url wrong');
-//                     }
-//                 });
-//             },
-//             error:function(response){
-//                 console.log('url wrong');
-//             }
-//         });
-//
-//         /**
-//          * AJAX call to weather api to retrieve weather of target location
-//          * calls function updateWeather to display data on page
-//          */
-//         var citySelected = $("#city-input").val();
-//         $.ajax({
-//             dataType: "json",
-//             data:{
-//                 APPID: '52ea1802f2e0fd3ef3a1708f1b6f52b6',
-//                 units: "imperial",
-//                 q: citySelected
-//             },
-//             url: "http://api.openweathermap.org/data/2.5/weather",
-//             method: "get",
-//             success: function(response){
-//                 console.log(response);
-//                 var cityName = response.name;
-//                 var cityWeather = response.weather[0].description;
-//                 var weatherIcon = response.weather[0].icon;
-//                 var cityTemp = Math.floor(response.main.temp);
-//                 console.log(cityName, cityWeather, weatherIcon, cityTemp);
-//                 updateWeather(cityName, cityWeather, weatherIcon, cityTemp);
-//             },
-//             error: function(response){
-//                 console.log("didn't work");
-//             }
-//         });
-//     });
-//
-// });
