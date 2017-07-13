@@ -54,7 +54,10 @@ section {
 }
 #buttonsOnPage button:hover {
     background-color: rgba(230, 230, 230, 0.80);
+}
 
+button:focus {
+    outline: 0 !important;
 }
 
 .activity0, .activity1, .activity2, .description {

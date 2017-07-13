@@ -300,12 +300,13 @@ function displayFoodList(){
 function updateWeather(city, weather, icon, temp) {
     var $weather = $("#weather");
     var $city_name = $("<div>").css({"font-size":"30px", "color": "white"}).text(city);
-    var $city_weather = $("<div>").css({"color": "#f0f1ee", "text-shadow": "#cacaca"}).text(weather);
+    var $city_weather = $("<div>").css({"color": "#f0f1ee", "text-shadow": "2px 2px black"}).text(weather);
     var $image = "images/" + icon + ".jpg";
-    $weather.css("background-image", "url(" + $image + ")");
-    var $city_temp = $("<div>").css({"font-size":"60px", "color": "white"}).text(temp +"°");
+    var $city_temp = $("<div>").css({"font-size":"60px", "color": "white", "text-shadow": "2px 2px black"}).text(temp +"°");
     var $weather_icon = $("<img>").attr("src",$image);
     $weather.append($city_name, $city_weather, $city_temp);
+    $weather.css("background-image", "url(" + $image + ")");
+
 }
 
 function changeCity(){
