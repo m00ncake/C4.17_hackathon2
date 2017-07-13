@@ -10,20 +10,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section id="opening-page" class="col-lg-offset-3 col-lg-6">
+    <div class="container-fluid">
+    <section id="opening-page" class="col-xs-8 col-xs-offset-2 col-lg-offset-3 col-lg-6">
         <nav class="navbar navbar-default">
                 <div class="navbar-header">
                     <p class="navbar-text">DayMakr</p>
                 </div>
         </nav>
         <form>
-            <div class="form-group">
-                <label for="city-input">City</label>
-                <input type="text" class="form-control" id="city-input" aria-describedby="city" placeholder="Enter location - Irvine, CA">
+            <div class="form-group" >
+                <div class="form-group-row">
+                    <label for="city-input">City</label>
+                    <input type="text" class="form-control input-lg" id="city-input" aria-describedby="city" placeholder="Enter location - Irvine, CA">
+                </div>
             </div>
-            <button type="button" id="submit-btn" class="submit btn btn-primary">Submit</button>
+            <button type="button" id="submit-btn" class="submit btn btn-primary btn-lg">Submit</button>
         </form>
     </section>
+    </div>
     <section id="main-page" class="container col-md-offset-2 col-md-8">
         <div class="page-top col-md-12 row">
             <div id="map" class="col-md-8">
