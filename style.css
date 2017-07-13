@@ -55,7 +55,7 @@ section {
 }
 #buttonsOnPage button{
     height: 80%;
-    width: 45%;
+    width: 30%;
     /*margin: 0.3vh 0.3vh;*/
     padding: 0;
     margin-left: 3%;
@@ -65,7 +65,10 @@ section {
 }
 #buttonsOnPage button:hover {
     background-color: rgba(230, 230, 230, 0.80);
+}
 
+button:focus {
+    outline: 0 !important;
 }
 
 .activity0, .activity1, .activity2, .description {
