@@ -28,14 +28,16 @@ function makeFirstCall(){
 }
 
 function ajaxOne(){
+    var city = $('#city-input').val();
     $.ajax({
         method: 'get',
         dataType: 'json',
-        url: 'yelpServer.php',
-        data: {
-            'location': $('#city-input').val(),
-            'term': 'Things to do'
-        },
+        url: 'http://localhost:3000/activities/' + city,
+        // url: 'yelpServer.php',
+        // data: {
+        //     'location': $('#city-input').val(),
+        //     'term': 'Things to do'
+        // },
         success: function (response){
             data = response;
             modArray();
@@ -48,14 +50,16 @@ function ajaxOne(){
 }
 
 function ajaxTwo(){
+    var city = $('#city-input').val();
     $.ajax({
         method:'get',
         dataType: 'json',
-        url: 'yelpServer.php',
-        data: {
-            'location': $('#city-input').val(),
-            'term': 'Food'
-        },
+        url: 'http://localhost:3000/food/' + city,
+        // url: 'yelpServer.php',
+        // data: {
+        //     'location': $('#city-input').val(),
+        //     'term': 'Food'
+        // },
         success: function (response) {
             data = response;
             modArray();
