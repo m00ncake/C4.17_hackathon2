@@ -1,0 +1,23 @@
+{
+  "name": "daymakr",
+  "version": "1.0.0",
+  "description": "Hackathon project involving the combination of different data sources into an application or game",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m00ncake/C4.17_hackathon2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m00ncake/C4.17_hackathon2/issues"
+  },
+  "homepage": "https://github.com/m00ncake/C4.17_hackathon2#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "yelp-fusion": "^1.0.3"
+  }
+}
