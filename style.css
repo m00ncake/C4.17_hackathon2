@@ -113,3 +113,16 @@ button:focus {
 button:focus {
     outline:0 !important;
 }
+#itinerary{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+}
+.food-info0 button, .food-info1 button, .food-info2 button, .description0 button, .description1 button, .description2 button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border: .1em solid green;
+}

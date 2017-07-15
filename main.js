@@ -5,6 +5,8 @@ var counter = 0;
 var addedFood = 0;
 var addedActivity = 0;
 var arrayCounter = 0;
+var activityItinerary = [];
+var foodItinerary = [];
 /**
  * document ready function adding click handler to submit button.
  * Runs AJAX call to retrieve Yelp activity options -- set response to golbal_result variable
@@ -23,25 +25,20 @@ function makeFirstCall(){
     $('section').css('opacity', 0);
     $("#opening-page").hide();
     $("#main-page").show();
-    ajaxOne();
-    ajaxThree();
+    getThingsToDo();
+    getWeather();
 }
 
-function ajaxOne(){
+function getThingsToDo(){
     var city = $('#city-input').val();
     $.ajax({
         method: 'get',
         dataType: 'json',
         url: 'http://localhost:3000/activities/' + city,
-        // url: 'yelpServer.php',
-        // data: {
-        //     'location': $('#city-input').val(),
-        //     'term': 'Things to do'
-        // },
         success: function (response){
             data = response;
-            modArray();
-            ajaxTwo();
+            createResultsArrays(data);
+            getFoodSpots();
         },
         error: function (response){
             console.log(response);
@@ -49,22 +46,17 @@ function ajaxOne(){
     });
 }
 
-function ajaxTwo(){
+function getFoodSpots(){
     var city = $('#city-input').val();
     $.ajax({
         method:'get',
         dataType: 'json',
         url: 'http://localhost:3000/food/' + city,
-        // url: 'yelpServer.php',
-        // data: {
-        //     'location': $('#city-input').val(),
-        //     'term': 'Food'
-        // },
         success: function (response) {
             data = response;
-            modArray();
+            createResultsArrays(data);
             displayFoodList();
-            displayAcvtivtyList();
+            displayActivityList();
             initMap();
         },
         error:function(response){
@@ -73,7 +65,7 @@ function ajaxTwo(){
     });
 }
 
-function ajaxThree(){
+function getWeather(){
     var citySelected = $("#city-input").val();
     $.ajax({
         dataType: "json",
@@ -97,8 +89,8 @@ function ajaxThree(){
     });
 }
 
-function modArray(){
-    for(var i = 0; i < 10; i++){
+function createResultsArrays(data){
+    for(var i = 0; i < 7; i++){
         var newArray = [];
         for(var e = 0; e < 3; e++){
             newArray.push(data[e]);
@@ -112,7 +104,6 @@ function modArray(){
     }
     arrayCounter++;
 }
-
 
 /**
  * function initMap creates map using googlemap api, displays map on page and sets markers in target locations
@@ -238,36 +229,50 @@ function initMap() {
         });
     }
     map.fitBounds(bounds);
-    function populateInfoWindow(marker, infowindow){
-        if(infowindow.marker != marker){
-            infowindow.marker = marker;
-            infowindow.setContent('<div>' + marker.title + '</div>');
-            infowindow.open(map, marker);
-            infowindow.addListener('closeclick', function(){
-                infowindow.setMarker(null);
-            });
-        }
-    }
     var listener = google.maps.event.addListener(map, "idle", function(){
         $('section').css('opacity', 1);
         $('body').css('background-image', '');
         google.maps.event.removeListener(listener);
     });
 }
+
+function populateInfoWindow(marker, infowindow){
+    if(infowindow.marker != marker){
+        infowindow.marker = marker;
+        infowindow.setContent('<div>' + marker.title + '</div>');
+        infowindow.open(map, marker);
+        infowindow.addListener('closeclick', function(){
+            infowindow.setMarker(null);
+        });
+    }
+}
+
 /**
  * displayActivityList function - goes through global_result object and displays to the dom three targeted activities
  */
-function displayAcvtivtyList(){
-    for(i=0; i<=2; i++){
+function displayActivityList(){
+    for(var i = 0; i < 3; i++){
         var activity = activity_result[counter][i].image_url;
         var name = activity_result[counter][i].name;
         var address = activity_result[counter][i].location.address1;
         var type = activity_result[counter][i].categories[0].title;
         var addButton = $('<button>',{
             text: 'Add',
-            class: 'addActivity'
+            class: ' btn addActivity'
         }).click(addActivity);
-        $(addButton).data('name', {picture: activity, activityName: name, activityAddress: address, activityType: type});
+        $(addButton).data('name', {
+            picture: activity,
+            activityName: name,
+            activityAddress: address,
+            activityType: type
+        });
+        if(activityItinerary.length > 0){
+            for(var e = 0; e < activityItinerary.length; e++){
+                if(activityItinerary[e].activityName === name){
+                    $(addButton).css('border', '.1em solid red').text('Remove');
+                }
+            }
+        }
         $(".activity" + i).css("background-image","url(" + activity + ")");
         $(".description" + i).html('<b>' + name + '</b>' +'<br>'+ type + '<br>' + address).append(addButton);
         locations.push({title: activity_result[counter][i].name, location: {lat: activity_result[counter][i].coordinates.latitude, lng: activity_result[counter][i].coordinates.longitude}});
@@ -287,13 +292,30 @@ function displayFoodList(){
         var picture = food_result[counter][t].image_url;
         var addButton = $('<button>',{
             text: 'Add',
-            class: 'addFood'
+            class: 'btn addFood'
         }).click(addFood);
+        $(addButton).data('name', {
+            foodPicture: picture,
+            foodName: name,
+            foodAddress: address,
+            foodPhone: phone,
+            foodPrice: price,
+            foodRating: rating,
+            foodType: type
+        });
+        if(foodItinerary.length > 0){
+            for(var i = 0; i < foodItinerary.length; i++){
+                if(foodItinerary[i].foodName === name){
+                    $(addButton).css('border', '.1em solid red').text('Remove');
+                }
+            }
+        }
         $('.food' + t).css("background-image","url(" + picture + ")");
         $('.food-info' + t).html('<b>' + name + '</b>' + '<br>' + price + " - " + rating + ' ' + '&#x2605' + '<br>' + type + '<br>' + address + '<br>' + phone).append(addButton);
         locations.push({title: food_result[counter][t].name, location: {lat: food_result[counter][t].coordinates.latitude, lng: food_result[counter][t].coordinates.longitude}});
     }
 }
+
 /**
  * updateWeather function takes three params draws information from weather api and displays target city information on page
  * @param city
@@ -307,7 +329,6 @@ function updateWeather(city, weather, icon, temp) {
     var $city_weather = $("<div>").css({"color": "#f0f1ee", "text-shadow": "2px 2px black"}).text(weather);
     var $image = "images/" + icon + ".jpg";
     var $city_temp = $("<div>").css({"font-size":"60px", "color": "white", "text-shadow": "2px 2px black"}).text(temp +"°");
-    var $weather_icon = $("<img>").attr("src",$image);
     $weather.append($city_name, $city_weather, $city_temp);
     $weather.css("background-image", "url(" + $image + ")");
 
@@ -325,8 +346,8 @@ function changeCity(){
     $("#weather img").remove();
     $("#opening-page").show(1000);
     $("#main-page").hide(1100);
-    newBackground();
     $('#city-input').val('');
+    newBackground();
 }
 
 function newPlans(){
@@ -334,7 +355,7 @@ function newPlans(){
         return;
     }else if($(this).text() === 'Previous' && counter !== 0) {
         counter--;
-    }else if($(this).text() === 'Next' && counter === 9){
+    }else if($(this).text() === 'Next' && counter === 5){
         return;
     }else {
         counter++;
@@ -342,7 +363,7 @@ function newPlans(){
     map;
     locations =[];
     markers = [];
-    displayAcvtivtyList();
+    displayActivityList();
     displayFoodList();
     initMap();
 }
@@ -354,22 +375,81 @@ function newBackground(){
 }
 
 function addFood(){
-    console.log('food working');
+    var food = $(this).data().name;
+    if($(this).text() === 'Remove'){
+        $(this).css('border', '.1em solid green');
+        $(this).text('Add');
+        removeFromFoodItinerary(food);
+        return;
+    }
+    if(addedFood === 3){
+        return;
+    }
+    $(this).css('border', '.1em solid red');
+    $(this).text('Remove');
+    foodItinerary.push(food);
+    addedFood++;
+    if(addedActivity === 3 && addedFood === 3){
+        displayItinerary();
+        $('#main-page').hide();
+        $('#itinerary').show();
+    }
 }
 
 function addActivity(){
     var activity = $(this).data().name;
-    switch(addedActivity){
-        case 0:
-            $('.activityAdded0').html(activity.activityName);
-            break;
-        case 1:
-            $('.activityAdded1');
-            break;
-        case 2:
-            $('.activityAdded2');
-            break;
+    if($(this).text() === 'Remove'){
+        $(this).css('border', '.1em solid green');
+        $(this).text('Add');
+        removeFromActivityItinerary(activity);
+        return;
     }
-    $('#main-page').hide();
-    $('#itinerary').show();
+    if(addedActivity === 3){
+        return;
+    }
+    $(this).css('border', '.1em solid red');
+    $(this).text('Remove');
+    activityItinerary.push(activity);
+    addedActivity++;
+    if(addedActivity === 3 && addedFood === 3){
+        displayItinerary();
+        $('#main-page').hide();
+        $('#itinerary').show();
+    }
 }
+
+function displayItinerary(){
+    var i = 0;
+    var e = 0;
+    activityItinerary.forEach(function(item){
+        $('.activityAdded' + i).html(item.activityName);
+        i++;
+    });
+    foodItinerary.forEach(function(item){
+        $('.foodAdded' + e).html(item.foodName);
+        e++;
+    });
+}
+
+function removeFromFoodItinerary(item){
+    var name = item.foodName;
+    for(var i = 0; i < foodItinerary.length; i++){
+        if(name === foodItinerary[i].foodName){
+            foodItinerary.splice(i, 1);
+            break;
+        }
+    }
+    addedFood--;
+}
+
+function removeFromActivityItinerary(item){
+    var name = item.activityName;
+    for(var i = 0; i < activityItinerary.length; i++){
+        if(name === activityItinerary[i].activityName){
+            activityItinerary.splice(i, 1);
+            break;
+        }
+    }
+    addedActivity--;
+}
+
