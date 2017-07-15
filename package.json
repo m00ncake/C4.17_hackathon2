@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/m00ncake/C4.17_hackathon2#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.3",
     "yelp-fusion": "^1.0.3"
   }
