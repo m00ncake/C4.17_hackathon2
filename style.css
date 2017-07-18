@@ -6,7 +6,7 @@ body {
     background-position: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
-    font-size: 25px;
+    font-size: 1.5em;
 }
 section {
     background-color: rgba(140, 165, 177, 0.30);
@@ -38,19 +38,19 @@ section {
     background-color: #8e0f0f;
     height: 34vh;
     margin-bottom: 0.3vh;
-    width: 50vw;
+    /*width: 50vw;*/
 }
 #weather {
     background-image: url("images/weather_Clear_Sky_01.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 29vh;
-    width: 15.5vw;
+    /*width: 15.5vw;*/
     /*TODO: figure out how to make this a relative size with bootstrap but make google maps able to draw itself correctly with an unknown size.  Maybe force google maps to redraw after element load?*/
 }
 #buttonsOnPage{
     height: 5vh;
-    width: 15.5vw;
+    /*width: 15.5vw;*/
     padding: 0;
 }
 #buttonsOnPage button{
@@ -87,7 +87,7 @@ button:focus {
     background-repeat: no-repeat;
 }
 .page-top{
-    width: 70vw;
+    /*width: 70vw;*/
 }
 .navbar-header{
     width: 100%;
@@ -100,14 +100,14 @@ button:focus {
 }
 #thingsToDo p{
     height: 5vh;
-    font-size: 4vh;
+    font-size: 1.5em;
     text-align: center;
 }
 #thingsToDo div{
     margin-bottom: 0.3vh;
 }
 #morning, #afternoon, #evening {
-    font-size: 2vmin;
+    font-size: 1em;
     font-weight: 300;
 }
 button:focus {
@@ -156,4 +156,12 @@ button:focus {
 }
 .hidden{
     display: none;
+}
+.thingsToDoHeading, .foodAndDrinkHeading{
+    font-size: 1.5em;
+    background-color: rgba(255, 255, 255, 0.80);
+}
+.description0, .description1, .description2, .food-info0, .food-info1, .food-info2{
+    font-size: .9em;
+    font-weight: 300;
 }

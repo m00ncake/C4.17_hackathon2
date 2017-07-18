@@ -23,7 +23,7 @@ $(document).ready(function(){
 });
 
 function makeFirstCall(){
-    $('body').css('background-image', 'url(https://68.media.tumblr.com/tumblr_m8av4xP06U1qiv9upo1_500.gif)');
+    $('body').css('background-image', 'url(https://cdn.dribbble.com/users/5661/screenshots/2491233/loading-gif-800x600.gif)');
     $('section').css('opacity', 0);
     $("#opening-page").hide();
     $("#main-page").show();
