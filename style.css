@@ -117,7 +117,7 @@ button:focus {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: white;
+    width: 60vw;
 }
 .food-info0 button, .food-info1 button, .food-info2 button, .description0 button, .description1 button, .description2 button{
     position: absolute;
@@ -125,4 +125,32 @@ button:focus {
     right: 0;
     background-color: white;
     border: .1em solid green;
+}
+.plans > div{
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 75%;
+    height: 30vh;
+}
+#itinerary .name{
+    font-size: 1.4em;
+    left: 0%;
+    text-align: center;
+}
+#itinerary p{
+    position: relative;
+    left: 7%;
+    color: black;
+    font-size: 0.7em;
+}
+#itinerary .btn-success{
+    position: relative;
+    left: 60%;
+    bottom: 20px;
+}
+#itinerary .btn-danger{
+    position: relative;
+    left: 50%;
+    bottom: 20px;
 }

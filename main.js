@@ -256,6 +256,8 @@ function displayActivityList(){
         var name = activity_result[counter][i].name;
         var address = activity_result[counter][i].location.address1;
         var type = activity_result[counter][i].categories[0].title;
+        var phone = activity_result[counter][i].display_phone;
+
         var addButton = $('<button>',{
             text: 'Add',
             class: ' btn addActivity'
@@ -264,7 +266,8 @@ function displayActivityList(){
             picture: activity,
             activityName: name,
             activityAddress: address,
-            activityType: type
+            activityType: type,
+            activityPhone: phone
         });
         if(activityItinerary.length > 0){
             for(var e = 0; e < activityItinerary.length; e++){
@@ -422,11 +425,14 @@ function displayItinerary(){
     var i = 0;
     var e = 0;
     activityItinerary.forEach(function(item){
-        $('.activityAdded' + i).html(item.activityName);
+        $('.activityName' + i).text(item.activityName);
+        $('.activityAddress' + i).text(item.activityAddress);
+        $('.activityPhone' + i).text(item.activityPhone);
         i++;
     });
     foodItinerary.forEach(function(item){
-        $('.foodAdded' + e).html(item.foodName);
+        $('.foodName' + e).text(item.foodName);
+        $('.foodAddress' + e).text(item.foodAddress);
         e++;
     });
 }
