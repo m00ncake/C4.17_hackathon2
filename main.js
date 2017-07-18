@@ -18,6 +18,8 @@ $(document).ready(function(){
     $("#previousPlans").click(newPlans);
     $("#nextPlans").click(newPlans);
     $('.submit').click(makeFirstCall);
+    $('.cancel').click(taskCancelled);
+    $('.success').click(taskComplete);
 });
 
 function makeFirstCall(){
@@ -433,6 +435,8 @@ function displayItinerary(){
     foodItinerary.forEach(function(item){
         $('.foodName' + e).text(item.foodName);
         $('.foodAddress' + e).text(item.foodAddress);
+        $('.foodPhone' + e).text(item.foodPhone);
+
         e++;
     });
 }
@@ -458,4 +462,12 @@ function removeFromActivityItinerary(item){
     }
     addedActivity--;
 }
-
+function taskCancelled(e){
+    console.log('button clicked');
+    console.log(e.target);
+    var ownId = this.id;
+        $("." + ownId).hide();
+    // console.log($('div.ownId'));
+    // $(toRemove).remove();
+    // toRemove.remove();
+}

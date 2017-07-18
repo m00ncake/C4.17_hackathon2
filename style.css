@@ -154,3 +154,6 @@ button:focus {
     left: 50%;
     bottom: 20px;
 }
+.hidden{
+    display: none;
+}
