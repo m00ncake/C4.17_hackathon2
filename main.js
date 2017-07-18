@@ -7,6 +7,7 @@ var addedActivity = 0;
 var arrayCounter = 0;
 var activityItinerary = [];
 var foodItinerary = [];
+var itineraryLocations= [];
 /**
  * document ready function adding click handler to submit button.
  * Runs AJAX call to retrieve Yelp activity options -- set response to golbal_result variable
@@ -18,10 +19,11 @@ $(document).ready(function(){
     $("#previousPlans").click(newPlans);
     $("#nextPlans").click(newPlans);
     $('.submit').click(makeFirstCall);
+    $('.thePlans').click(togglePlans);
 });
 
 function makeFirstCall(){
-    $('body').css('background-image', 'url(https://68.media.tumblr.com/tumblr_m8av4xP06U1qiv9upo1_500.gif)');
+    $('body').css('background-image', 'url(https://cdn.dribbble.com/users/5661/screenshots/2491233/loading-gif-800x600.gif)');
     $('section').css('opacity', 0);
     $("#opening-page").hide();
     $("#main-page").show();
@@ -204,12 +206,20 @@ function initMap() {
             ]
         }
     ];
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 34.052235, lng: -118.243683},
-        zoom: 13,
-        styles: styles
-    });
-    google.maps.event.trigger(map,'resize');
+    if(addedFood === 3 && addedActivity === 3){
+        map = new google.maps.Map(document.getElementById('mapTwo'), {
+            center: {lat: 34.052235, lng: -118.243683},
+            zoom: 13,
+            styles: styles
+        });
+    }else{
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 34.052235, lng: -118.243683},
+            zoom: 13,
+            styles: styles
+        });
+    }
+    // google.maps.event.trigger(map,'resize');
 
     var largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
@@ -228,10 +238,12 @@ function initMap() {
             populateInfoWindow(this, largeInfowindow);
         });
     }
-    map.fitBounds(bounds);
+    // map.fitBounds(bounds);
     var listener = google.maps.event.addListener(map, "idle", function(){
         $('section').css('opacity', 1);
         $('body').css('background-image', '');
+        google.maps.event.trigger(map,'resize');
+        map.fitBounds(bounds);
         google.maps.event.removeListener(listener);
     });
 }
@@ -256,6 +268,8 @@ function displayActivityList(){
         var name = activity_result[counter][i].name;
         var address = activity_result[counter][i].location.address1;
         var type = activity_result[counter][i].categories[0].title;
+        var lat = activity_result[counter][i].coordinates.latitude;
+        var lng = activity_result[counter][i].coordinates.longitude;
         var addButton = $('<button>',{
             text: 'Add',
             class: ' btn addActivity'
@@ -264,7 +278,9 @@ function displayActivityList(){
             picture: activity,
             activityName: name,
             activityAddress: address,
-            activityType: type
+            activityType: type,
+            activityLat: lat,
+            activityLng: lng
         });
         if(activityItinerary.length > 0){
             for(var e = 0; e < activityItinerary.length; e++){
@@ -290,6 +306,8 @@ function displayFoodList(){
         var rating = food_result[counter][t].rating;
         var type = food_result[counter][t].categories[0].title;
         var picture = food_result[counter][t].image_url;
+        var lat = food_result[counter][t].coordinates.latitude;
+        var lng = food_result[counter][t].coordinates.longitude;
         var addButton = $('<button>',{
             text: 'Add',
             class: 'btn addFood'
@@ -301,7 +319,9 @@ function displayFoodList(){
             foodPhone: phone,
             foodPrice: price,
             foodRating: rating,
-            foodType: type
+            foodType: type,
+            foodLat: lat,
+            foodLng: lng
         });
         if(foodItinerary.length > 0){
             for(var i = 0; i < foodItinerary.length; i++){
@@ -342,6 +362,13 @@ function changeCity(){
     locations =[];
     map;
     markers = [];
+    activityItinerary = [];
+    foodItinerary = [];
+    addedFood = 0;
+    addedActivity = 0;
+    arrayCounter = 0;
+    $('.thingsToDoHeading').text('Things To Do - Add 3');
+    $('.foodAndDrinkHeading').text('Food & Drink - Add 3');
     $("#weather div").remove();
     $("#weather img").remove();
     $("#opening-page").show(1000);
@@ -383,12 +410,18 @@ function addFood(){
         return;
     }
     if(addedFood === 3){
+        $('.foodAndDrinkHeading').text('Food & Drink - Remove one item').css('background-color', 'red');
+        setTimeout(function(){
+            displayFoodCount();
+            $('.foodAndDrinkHeading').css('background-color', 'rgba(255, 255, 255, 0.80)');
+        }, 2000);
         return;
     }
     $(this).css('border', '.1em solid red');
     $(this).text('Remove');
     foodItinerary.push(food);
     addedFood++;
+    displayFoodCount();
     if(addedActivity === 3 && addedFood === 3){
         displayItinerary();
         $('#main-page').hide();
@@ -405,12 +438,18 @@ function addActivity(){
         return;
     }
     if(addedActivity === 3){
+        $('.thingsToDoHeading').text('Things To Do - Remove one item').css('background-color', 'red');
+        setTimeout(function(){
+            displayActivityCount();
+            $('.thingsToDoHeading').css('background-color', 'rgba(255, 255, 255, 0.80)');
+        }, 2000);
         return;
     }
     $(this).css('border', '.1em solid red');
     $(this).text('Remove');
     activityItinerary.push(activity);
     addedActivity++;
+    displayActivityCount();
     if(addedActivity === 3 && addedFood === 3){
         displayItinerary();
         $('#main-page').hide();
@@ -418,17 +457,72 @@ function addActivity(){
     }
 }
 
+function displayActivityCount(){
+    switch(addedActivity){
+        case 1:
+            $('.thingsToDoHeading').text('Things To Do - Add 2');
+            break;
+        case 2:
+            $('.thingsToDoHeading').text('Things To Do - Add 1');
+            break;
+        case 3:
+            $('.thingsToDoHeading').text('Things To Do');
+            break;
+        default:
+            $('.thingsToDoHeading').text('Things To Do - Add 3');
+    }
+}
+
+function displayFoodCount(){
+    switch(addedFood){
+        case 1:
+            $('.foodAndDrinkHeading').text('Food & Drink - Add 2');
+            break;
+        case 2:
+            $('.foodAndDrinkHeading').text('Food & Drink - Add 1');
+            break;
+        case 3:
+            $('.foodAndDrinkHeading').text('Food & Drink');
+            break;
+        default:
+            $('.foodAndDrinkHeading').text('Food & Drink - Add 3');
+    }
+}
+
 function displayItinerary(){
     var i = 0;
     var e = 0;
     activityItinerary.forEach(function(item){
-        $('.activityAdded' + i).html(item.activityName);
+        var name = $('<h4>').text(item.activityName);
+        var address = $('<p>').text(item.activityAddress);
+        var type = $('<p>').text(item.activityType);
+        var image = $('<div>').css('background-image', 'url('+item.picture+')');
+        var container = $('<div>').append(name, address, type);
+        $(image).addClass('col-xs-6');
+        $(container).addClass('col-xs-6');
+        $('.activityAdded' + i).append(container, image);
+        itineraryLocations.push({title: item.activityName, location: {lat: item.activityLat, lng: item.activityLng}});
         i++;
     });
     foodItinerary.forEach(function(item){
-        $('.foodAdded' + e).html(item.foodName);
+        var name = $('<h4>').text(item.foodName);
+        var rating = $('<p>').text(item.foodPrice +" - "+ item.foodRating+" review rating");
+        var address = $('<p>').text(item.foodAddress);
+        var phone = $('<p>').text(item.foodPhone);
+        var image = $('<div>').css('background-image', 'url('+item.foodPicture+')');
+        var container = $('<div>').append(name, rating, address, phone);
+        $(image).addClass('col-xs-6');
+        $(container).addClass('col-xs-6');
+        $('.foodAdded' + e).append(container, image);
+        itineraryLocations.push({title: item.foodName, location: {lat: item.foodLat, lng: item.foodLng}});
         e++;
     });
+    var city = $('<div>').text($('#city-input').val());
+    var date = $('<div>').text(new Date().toDateString());
+    var heading = $('<h2>').text('Itinerary');
+    $('.itineraryHeading').append(heading, city, date);
+    locations = itineraryLocations;
+    initMap();
 }
 
 function removeFromFoodItinerary(item){
@@ -440,6 +534,7 @@ function removeFromFoodItinerary(item){
         }
     }
     addedFood--;
+    displayFoodCount();
 }
 
 function removeFromActivityItinerary(item){
@@ -451,5 +546,22 @@ function removeFromActivityItinerary(item){
         }
     }
     addedActivity--;
+    displayActivityCount();
+}
+
+function togglePlans(){
+    var plans = this;
+    var item = $(plans).children('a');
+    if($(item).text() === 'Food Plans'){
+        $('.activityPlans').hide();
+        $('.foodPlans').show();
+        $('li').removeClass('active');
+        $(plans).addClass('active');
+    }else{
+        $('.activityPlans').show();
+        $('.foodPlans').hide();
+        $('li').removeClass('active');
+        $(plans).addClass('active');
+    }
 }
 
