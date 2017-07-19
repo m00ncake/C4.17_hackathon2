@@ -124,7 +124,9 @@ button:focus {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 60vw;
+    width: 70vw;
+    height: 100vh;
+    background-color: rgba(230, 230, 230, 0.80);
 }
 .food-info0 button, .food-info1 button, .food-info2 button, .description0 button, .description1 button, .description2 button{
     position: relative;
@@ -135,10 +137,10 @@ button:focus {
 }
 .plans > div{
     background-color: white;
-    margin: 0 auto;
-    margin-top: 20px;
-    width: 75%;
-    height: 30vh;
+    /*margin: 0 auto;*/
+    /*margin-top: 20px;*/
+    /*width: 75%;*/
+    height: 26.6vh;
 }
 #itinerary .name{
     font-size: 1.4em;
@@ -174,4 +176,17 @@ button:focus {
 }
 .backgroundImage{
     background-image: url("green_stripes.png");
+}
+#mapTwo, .foodPlans, .activityPlans{
+    float: right;
+    height: 80vh;
+}
+.itineraryHeading{
+    height: 20vh;
+}
+.foodPlans{
+    display: none;
+}
+.foodPlans, .activityPlans{
+    padding-left: 0;
 }
