@@ -280,9 +280,9 @@ function displayActivityList(){
         var phone = activity_result[counter][i].display_phone;
         var lat = activity_result[counter][i].coordinates.latitude;
         var lng = activity_result[counter][i].coordinates.longitude;
-        var addButton = $('<button>',{
-            text: 'Add',
-            class: ' btn btn-sm addActivity'
+        var addButton = $('<span>',{
+            // text: 'Add',
+            class: ' glyphicon glyphicon-plus-sign addActivity'
         }).click(addActivity);
         $(addButton).data('name', {
             picture: activity,
@@ -296,7 +296,9 @@ function displayActivityList(){
         if(activityItinerary.length > 0){
             for(var e = 0; e < activityItinerary.length; e++){
                 if(activityItinerary[e].activityName === name){
-                    $(addButton).css('border', '.1em solid red').text('Remove');
+                    // $(addButton).css('border', '.1em solid red').text('Remove');
+                    $(addButton).removeClass('glyphicon-plus-sign');
+                    $(addButton).addClass('glyphicon-remove-sign');
                 }
             }
         }
@@ -319,9 +321,9 @@ function displayFoodList(){
         var picture = food_result[counter][t].image_url;
         var lat = food_result[counter][t].coordinates.latitude;
         var lng = food_result[counter][t].coordinates.longitude;
-        var addButton = $('<button>',{
-            text: 'Add',
-            class: 'btn btn-sm addFood'
+        var addButton = $('<span>',{
+            // text: 'Add',
+            class: 'glyphicon glyphicon-plus-sign addFood'
         }).click(addFood);
         $(addButton).data('name', {
             foodPicture: picture,
@@ -337,7 +339,9 @@ function displayFoodList(){
         if(foodItinerary.length > 0){
             for(var i = 0; i < foodItinerary.length; i++){
                 if(foodItinerary[i].foodName === name){
-                    $(addButton).css('border', '.1em solid red').text('Remove');
+                    // $(addButton).css('border', '.1em solid red').text('Remove');
+                    $(addButton).removeClass('glyphicon-plus-sign');
+                    $(addButton).addClass('glyphicon-remove-sign');
                 }
             }
         }
@@ -407,17 +411,17 @@ function newBackground(){
 
 function addFood(){
     var food = $(this).data().name;
-    if($(this).text() === 'Remove'){
-        $(this).css('border', '.1em solid green');
-        $(this).text('Add');
+    if($(this).hasClass('glyphicon-remove-sign')){
+        $(this).removeClass('glyphicon-remove-sign');
+        $(this).addClass('glyphicon-plus-sign');
         removeFromFoodItinerary(food);
         return;
     }
     if(addedFood === 3){
         return;
     }
-    $(this).css('border', '.1em solid red');
-    $(this).text('Remove');
+    $(this).removeClass('glyphicon-plus-sign');
+    $(this).addClass('glyphicon-remove-sign');
     foodItinerary.push(food);
     addedFood++;
     if(addedActivity === 3 && addedFood === 3){
@@ -429,17 +433,17 @@ function addFood(){
 
 function addActivity(){
     var activity = $(this).data().name;
-    if($(this).text() === 'Remove'){
-        $(this).css('border', '.1em solid green');
-        $(this).text('Add');
+    if($(this).hasClass('glyphicon-remove-sign')){
+        $(this).removeClass('glyphicon-remove-sign');
+        $(this).addClass('glyphicon-plus-sign');
         removeFromActivityItinerary(activity);
         return;
     }
     if(addedActivity === 3){
         return;
     }
-    $(this).css('border', '.1em solid red');
-    $(this).text('Remove');
+    $(this).removeClass('glyphicon-plus-sign');
+    $(this).addClass('glyphicon-remove-sign');
     activityItinerary.push(activity);
     addedActivity++;
     if(addedActivity === 3 && addedFood === 3){
