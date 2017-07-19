@@ -465,6 +465,15 @@ function removeFromActivityItinerary(item){
 function taskCancelled(){
     $(this).closest("div").hide();
 }
+
+function taskComplete(e){
+    console.log('button clicked');
+    console.log(e.target);
+    var ownId = this.id;
+    $("." + ownId).css("background-image", "url(https://s-media-cache-ak0.pinimg.com/originals/d2/90/6d/d2906d07f5392c97c58c41f29a28eba2.jpg)");
+    $("." + ownId).addClass('reopen');
+}
+  
 function taskComplete(){
     $(this).closest("div").toggleClass("backgroundImage");
 }
