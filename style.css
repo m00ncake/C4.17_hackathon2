@@ -165,3 +165,6 @@ button:focus {
     font-size: .9em;
     font-weight: 300;
 }
+.backgroundImage{
+    background-image: url("green_stripes.png");
+}
