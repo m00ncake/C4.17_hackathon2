@@ -466,7 +466,7 @@ function taskCancelled(){
     $(this).closest("div").hide();
 }
 
-function taskComplete(e) {
+function taskComplete(e){
     console.log('button clicked');
     console.log(e.target);
     var ownId = this.id;
@@ -476,5 +476,4 @@ function taskComplete(e) {
 
 function taskComplete(){
     $(this).closest("div").toggleClass("backgroundImage");
-
 }
