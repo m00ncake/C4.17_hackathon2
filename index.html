@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
     <section id="opening-page" class="col-xs-8 col-xs-offset-2 col-lg-offset-3 col-lg-6">
         <nav class="navbar navbar-default">
                 <div class="navbar-header">
@@ -27,77 +27,102 @@
             <button type="button" id="submit-btn" class="submit btn btn-primary btn-lg">Submit</button>
         </form>
     </section>
-    </div>
- 
-<section id="main-page" class="container col-md-offset-2 col-md-8">
-    <div class="page-top col-md-12 row">
-        <div id="map" class="col-md-8">
+</div>
+
+<section id="main-page" class="container col-xs-12 col-md-offset-2 col-md-8">
+    <div class="page-top col-xs-12 col-md-12 row">
+        <div id="map" class="col-xs-8 col-md-8">
         </div>
-        <div id="weather" class="col-md-4">
+        <div id="weather" class="col-xs-4 col-md-4">
         </div>
-        <div id="buttonsOnPage" class="col-md-4">
-            <button id="changeCity" class="col-md-2 btn btn-inverse">Change<br>City</button>
+        <div id="buttonsOnPage" class="col-xs-4 col-md-4">
+            <button id="changeCity" class="col-md-2 btn btn-inverse">New City</button>
             <button id="previousPlans" class="col-md-2 btn btn-inverse">Previous</button>
             <button id="nextPlans" class="col-md-2 btn btn-inverse">Next</button>
         </div>
     </div>
-    <div id="">
-        <div id="thingsToDo" class="">
-            <div class="col-md-6">
-                <p>Things to do</p>
+    <div id="results">
+        <div class="thingsToDo col-xs-12 col-md-6">
+            <p class="thingsToDoHeading">Things To Do - Add 3</p>
+            <div class="activity col-md-12">
+                <div class="activity0 col-xs-6 col-md-6"></div>
+                <div class="description0 col-xs-6 col-md-6"></div>
             </div>
-            <div class="col-md-6">
-                <p>Food & Drink</p>
-
+            <div class="activity col-md-12">
+                <div class="activity1 col-xs-6 col-md-6"></div>
+                <div class="description1 col-xs-6 col-md-6"></div>
             </div>
-        </div>
-        <div id="morning" class="">
-            <div class="activity col-md-6">
-                <div class="activity0 col-md-6"></div>
-                <div class="description0 col-md-6"></div>
-            </div>
-            <div class="food col-md-6">
-                <div class="food0 col-md-6"></div>
-                <div class="food-info0 col-md-6"></div>
+            <div class="activity col-md-12">
+                <div class="activity2 col-xs-6 col-md-6"></div>
+                <div class="description2 col-xs-6 col-md-6"></div>
             </div>
         </div>
-        <div id="afternoon">
-            <div class="activity col-md-6">
-                <div class="activity1 col-md-6"></div>
-                <div class="description1 col-md-6"></div>
+        <div class="foodSpots col-xs-12 col-md-6">
+            <p class="foodAndDrinkHeading">Food & Drink - Add 3</p>
+            <div class="food col-md-12">
+                <div class="food0 col-xs-6 col-md-6"></div>
+                <div class="food-info0 col-xs-6 col-md-6"></div>
             </div>
-            <div class="food col-md-6">
-                <div class="food1 col-md-6"></div>
-                <div class="food-info1 col-md-6"></div>
+            <div class="food col-md-12">
+                <div class="food1 col-xs-6 col-md-6"></div>
+                <div class="food-info1 col-xs-6 col-md-6"></div>
             </div>
-        </div>
-        <div id="evening">
-            <div class="activity col-md-6">
-                <div class="activity2 col-md-6"></div>
-                <div class="description2 col-md-6"></div>
-            </div>
-            <div class="food col-md-6">
-                <div class="food2 col-md-6"></div>
-                <div class="food-info2 col-md-6"></div>
+            <div class="food col-md-12">
+                <div class="food2 col-xs-6 col-md-6"></div>
+                <div class="food-info2 col-xs-6 col-md-6"></div>
             </div>
         </div>
     </div>
 </section>
 <section id="itinerary">
-    <div class="morningPlans">
-        <div></div>
-        <div class="activityAdded0"></div>
-        <div class="foodAdded0"></div>
+    <div class="morningPlans plans">
+        <div class="activityAdded0 btn0ad btn0as">
+            <p class="activityName0 name"></p>
+            <p class="activityAddress0"></p>
+            <p class="activityPhone0"></p>
+            <button id="btn0ad"  class="cancel btn btn-danger">Cancel</button>
+            <button id="btn0as" class="complete btn btn-success">Complete</button>
+        </div>
+        <div class="foodAdded0 btn0fd btn0fs">
+            <p class="foodName0 name"></p>
+            <p class="foodAddress0"></p>
+            <p class="foodPhone0"></p>
+            <button id="btn0fd" class="btn btn-danger cancel">Cancel</button>
+            <button id="btn0fs" class="btn btn-success complete ">Complete</button>
+        </div>
     </div>
-    <div class="afternoonPlans">
-        <div></div>
-        <div class="activityAdded1"></div>
-        <div class="foodAdded1"></div>
+    <div class="afternoonPlans plans">
+        <div class="activityAdded1 btn1ad btn1as">
+            <p class="activityName1 name"></p>
+            <p class="activityAddress1"></p>
+            <p class="activityPhone1"></p>
+            <button id="btn1ad" class="btn btn-danger cancel">Cancel</button>
+            <button id="btn1as" class="btn btn-success complete">Complete</button>
+        </div>
+        <div class="foodAdded1 btn1fd btn1fs">
+            <p class="foodName1 name"></p>
+            <p class="foodAddress1"></p>
+            <p class="foodPhone1"></p>
+            <button id="btn1fd" class="btn btn-danger cancel">Cancel</button>
+            <button id="btn1fs" class="btn btn-success complete">Complete</button>
+        </div>
     </div>
-    <div class="eveningPlans">
-        <div></div>
-        <div class="activityAdded2"></div>
-        <div class="foodAdded2"></div>
+    <div class="eveningPlans plans">
+        <div class="activityAdded2 btn2ad btn2as">
+            <p class="activityName2 name"></p>
+            <p class="activityAddress2"></p>
+            <p class="activityPhone2"></p>
+            <button id="btn2ad" class="btn btn-danger cancel">Cancel</button>
+            <button id="btn2as" class="btn btn-success complete">Complete</button>
+
+        </div>
+        <div class="foodAdded2 btn2fd btn2fs">
+            <p class="foodName2 name"></p>
+            <p class="foodAddress2"></p>
+            <p class="foodPhone2"></p>
+            <button id="btn2fd" class="btn btn-danger cancel">Cancel</button>
+            <button id="btn2fs" class="btn btn-success complete">Complete</button>
+        </div>
     </div>
 </section>
 <script async defer

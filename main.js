@@ -18,10 +18,13 @@ $(document).ready(function(){
     $("#previousPlans").click(newPlans);
     $("#nextPlans").click(newPlans);
     $('.submit').click(makeFirstCall);
+    $('.cancel').click(taskCancelled);
+    $('.complete').click(taskComplete);
+    $('.reopen').click(taskReopen);
 });
 
 function makeFirstCall(){
-    $('body').css('background-image', 'url(https://68.media.tumblr.com/tumblr_m8av4xP06U1qiv9upo1_500.gif)');
+    $('body').css('background-image', 'url(https://cdn.dribbble.com/users/5661/screenshots/2491233/loading-gif-800x600.gif)');
     $('section').css('opacity', 0);
     $("#opening-page").hide();
     $("#main-page").show();
@@ -256,6 +259,8 @@ function displayActivityList(){
         var name = activity_result[counter][i].name;
         var address = activity_result[counter][i].location.address1;
         var type = activity_result[counter][i].categories[0].title;
+        var phone = activity_result[counter][i].display_phone;
+
         var addButton = $('<button>',{
             text: 'Add',
             class: ' btn addActivity'
@@ -264,7 +269,8 @@ function displayActivityList(){
             picture: activity,
             activityName: name,
             activityAddress: address,
-            activityType: type
+            activityType: type,
+            activityPhone: phone
         });
         if(activityItinerary.length > 0){
             for(var e = 0; e < activityItinerary.length; e++){
@@ -422,11 +428,16 @@ function displayItinerary(){
     var i = 0;
     var e = 0;
     activityItinerary.forEach(function(item){
-        $('.activityAdded' + i).html(item.activityName);
+        $('.activityName' + i).text(item.activityName);
+        $('.activityAddress' + i).text(item.activityAddress);
+        $('.activityPhone' + i).text(item.activityPhone);
         i++;
     });
     foodItinerary.forEach(function(item){
-        $('.foodAdded' + e).html(item.foodName);
+        $('.foodName' + e).text(item.foodName);
+        $('.foodAddress' + e).text(item.foodAddress);
+        $('.foodPhone' + e).text(item.foodPhone);
+
         e++;
     });
 }
@@ -452,4 +463,19 @@ function removeFromActivityItinerary(item){
     }
     addedActivity--;
 }
-
+function taskCancelled(e){
+    console.log('button clicked');
+    console.log(e.target);
+    var ownId = this.id;
+    $("." + ownId).hide();
+}
+function taskComplete(e){
+    console.log('button clicked');
+    console.log(e.target);
+    var ownId = this.id;
+    $("." + ownId).css("background-image", "url(https://s-media-cache-ak0.pinimg.com/originals/d2/90/6d/d2906d07f5392c97c58c41f29a28eba2.jpg)")
+    $("." + ownId).addClass('reopen')
+}
+function taskReopen(){
+    console.log("Button Reopen Clicked");
+}

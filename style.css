@@ -6,7 +6,7 @@ body {
     background-position: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
-    font-size: 25px;
+    font-size: 1.5em;
 }
 section {
     background-color: rgba(140, 165, 177, 0.30);
@@ -38,19 +38,19 @@ section {
     background-color: #8e0f0f;
     height: 34vh;
     margin-bottom: 0.3vh;
-    width: 50vw;
+    /*width: 50vw;*/
 }
 #weather {
     background-image: url("images/weather_Clear_Sky_01.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 29vh;
-    width: 15.5vw;
+    /*width: 15.5vw;*/
     /*TODO: figure out how to make this a relative size with bootstrap but make google maps able to draw itself correctly with an unknown size.  Maybe force google maps to redraw after element load?*/
 }
 #buttonsOnPage{
     height: 5vh;
-    width: 15.5vw;
+    /*width: 15.5vw;*/
     padding: 0;
 }
 #buttonsOnPage button{
@@ -87,7 +87,7 @@ button:focus {
     background-repeat: no-repeat;
 }
 .page-top{
-    width: 70vw;
+    /*width: 70vw;*/
 }
 .navbar-header{
     width: 100%;
@@ -100,14 +100,14 @@ button:focus {
 }
 #thingsToDo p{
     height: 5vh;
-    font-size: 4vh;
+    font-size: 1.5em;
     text-align: center;
 }
 #thingsToDo div{
     margin-bottom: 0.3vh;
 }
 #morning, #afternoon, #evening {
-    font-size: 2vmin;
+    font-size: 1em;
     font-weight: 300;
 }
 button:focus {
@@ -117,7 +117,7 @@ button:focus {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: white;
+    width: 60vw;
 }
 .food-info0 button, .food-info1 button, .food-info2 button, .description0 button, .description1 button, .description2 button{
     position: absolute;
@@ -125,4 +125,43 @@ button:focus {
     right: 0;
     background-color: white;
     border: .1em solid green;
+}
+.plans > div{
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 75%;
+    height: 30vh;
+}
+#itinerary .name{
+    font-size: 1.4em;
+    left: 0%;
+    text-align: center;
+}
+#itinerary p{
+    position: relative;
+    left: 7%;
+    color: black;
+    font-size: 0.7em;
+}
+#itinerary .btn-success{
+    position: relative;
+    left: 60%;
+    bottom: 20px;
+}
+#itinerary .btn-danger{
+    position: relative;
+    left: 50%;
+    bottom: 20px;
+}
+.hidden{
+    display: none;
+}
+.thingsToDoHeading, .foodAndDrinkHeading{
+    font-size: 1.5em;
+    background-color: rgba(255, 255, 255, 0.80);
+}
+.description0, .description1, .description2, .food-info0, .food-info1, .food-info2{
+    font-size: .9em;
+    font-weight: 300;
 }
