@@ -262,7 +262,7 @@ function displayActivityList(){
 
         var addButton = $('<button>',{
             text: 'Add',
-            class: ' btn addActivity'
+            class: ' btn btn-sm addActivity'
         }).click(addActivity);
         $(addButton).data('name', {
             picture: activity,
@@ -297,7 +297,7 @@ function displayFoodList(){
         var picture = food_result[counter][t].image_url;
         var addButton = $('<button>',{
             text: 'Add',
-            class: 'btn addFood'
+            class: 'btn btn-sm addFood'
         }).click(addFood);
         $(addButton).data('name', {
             foodPicture: picture,
@@ -330,10 +330,10 @@ function displayFoodList(){
  */
 function updateWeather(city, weather, icon, temp) {
     var $weather = $("#weather");
-    var $city_name = $("<div>").css({"font-size":"30px", "color": "white"}).text(city);
+    var $city_name = $("<div>").css({"font-size":"1.5em", "color": "white"}).text(city);
     var $city_weather = $("<div>").css({"color": "#f0f1ee", "text-shadow": "2px 2px black"}).text(weather);
     var $image = "images/" + icon + ".jpg";
-    var $city_temp = $("<div>").css({"font-size":"60px", "color": "white", "text-shadow": "2px 2px black"}).text(temp +"°");
+    var $city_temp = $("<div>").css({"font-size":"2em", "color": "white", "text-shadow": "2px 2px black"}).text(temp +"°");
     $weather.append($city_name, $city_weather, $city_temp);
     $weather.css("background-image", "url(" + $image + ")");
 
