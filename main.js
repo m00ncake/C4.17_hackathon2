@@ -7,6 +7,7 @@ var addedActivity = 0;
 var arrayCounter = 0;
 var activityItinerary = [];
 var foodItinerary = [];
+var itineraryLocations= [];
 /**
  * document ready function adding click handler to submit button.
  * Runs AJAX call to retrieve Yelp activity options -- set response to golbal_result variable
@@ -20,6 +21,7 @@ $(document).ready(function(){
     $('.submit').click(makeFirstCall);
     $('.cancel').click(taskCancelled);
     $('.complete').click(taskComplete);
+    $('.thePlans').click(togglePlans);
 });
 
 function makeFirstCall(){
@@ -206,12 +208,27 @@ function initMap() {
             ]
         }
     ];
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 34.052235, lng: -118.243683},
-        zoom: 13,
-        styles: styles
-    });
-    google.maps.event.trigger(map,'resize');
+
+    if(addedFood === 3 && addedActivity === 3){
+        map = new google.maps.Map(document.getElementById('mapTwo'), {
+            center: {lat: 34.052235, lng: -118.243683},
+            zoom: 13,
+            styles: styles
+        });
+    }else{
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 34.052235, lng: -118.243683},
+            zoom: 13,
+            styles: styles
+        });
+    }
+
+    // map = new google.maps.Map(document.getElementById('map'), {
+    //     center: {lat: 34.052235, lng: -118.243683},
+    //     zoom: 13,
+    //     styles: styles
+    // });
+    // google.maps.event.trigger(map,'resize');
 
     var largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
@@ -230,10 +247,12 @@ function initMap() {
             populateInfoWindow(this, largeInfowindow);
         });
     }
-    map.fitBounds(bounds);
+    // map.fitBounds(bounds);
     var listener = google.maps.event.addListener(map, "idle", function(){
         $('section').css('opacity', 1);
         $('body').css('background-image', '');
+        google.maps.event.trigger(map,'resize');
+        map.fitBounds(bounds);
         google.maps.event.removeListener(listener);
     });
 }
@@ -259,7 +278,8 @@ function displayActivityList(){
         var address = activity_result[counter][i].location.address1;
         var type = activity_result[counter][i].categories[0].title;
         var phone = activity_result[counter][i].display_phone;
-
+        var lat = activity_result[counter][i].coordinates.latitude;
+        var lng = activity_result[counter][i].coordinates.longitude;
         var addButton = $('<button>',{
             text: 'Add',
             class: ' btn btn-sm addActivity'
@@ -269,7 +289,9 @@ function displayActivityList(){
             activityName: name,
             activityAddress: address,
             activityType: type,
-            activityPhone: phone
+            activityPhone: phone,
+            activityLat: lat,
+            activityLng: lng
         });
         if(activityItinerary.length > 0){
             for(var e = 0; e < activityItinerary.length; e++){
@@ -295,6 +317,8 @@ function displayFoodList(){
         var rating = food_result[counter][t].rating;
         var type = food_result[counter][t].categories[0].title;
         var picture = food_result[counter][t].image_url;
+        var lat = food_result[counter][t].coordinates.latitude;
+        var lng = food_result[counter][t].coordinates.longitude;
         var addButton = $('<button>',{
             text: 'Add',
             class: 'btn btn-sm addFood'
@@ -306,7 +330,9 @@ function displayFoodList(){
             foodPhone: phone,
             foodPrice: price,
             foodRating: rating,
-            foodType: type
+            foodType: type,
+            foodLat: lat,
+            foodLng: lng
         });
         if(foodItinerary.length > 0){
             for(var i = 0; i < foodItinerary.length; i++){
@@ -430,15 +456,22 @@ function displayItinerary(){
         $('.activityName' + i).text(item.activityName);
         $('.activityAddress' + i).text(item.activityAddress);
         $('.activityPhone' + i).text(item.activityPhone);
+        itineraryLocations.push({title: item.activityName, location: {lat: item.activityLat, lng: item.activityLng}});
         i++;
     });
     foodItinerary.forEach(function(item){
         $('.foodName' + e).text(item.foodName);
         $('.foodAddress' + e).text(item.foodAddress);
         $('.foodPhone' + e).text(item.foodPhone);
-
+        itineraryLocations.push({title: item.foodName, location: {lat: item.foodLat, lng: item.foodLng}});
         e++;
     });
+    var city = $('<div>').text($('#city-input').val());
+    var date = $('<div>').text(new Date().toDateString());
+    var heading = $('<h2>').text('Itinerary');
+    $('.itineraryHeading').append(heading, city, date);
+    locations = itineraryLocations;
+    initMap();
 }
 
 function removeFromFoodItinerary(item){
@@ -476,4 +509,20 @@ function taskComplete(e){
 
 function taskComplete(){
     $(this).closest("div").toggleClass("backgroundImage");
+}
+
+function togglePlans(){
+    var plans = this;
+    var item = $(plans).children('a');
+    if($(item).text() === 'Food Plans'){
+        $('.activityPlans').hide();
+        $('.foodPlans').show();
+        $('li').removeClass('active');
+        $(plans).addClass('active');
+    }else{
+        $('.activityPlans').show();
+        $('.foodPlans').hide();
+        $('li').removeClass('active');
+        $(plans).addClass('active');
+    }
 }
