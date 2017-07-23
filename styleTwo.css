@@ -1,0 +1,140 @@
+/***************************Applied to the Things to Do and Food & Drink pages***************************/
+
+.row div {
+    border: .01em solid black;
+    height: 14.28vh;
+    text-align: center;
+    font-weight: bold;
+}
+
+.col-md-2 {
+    font-size: .9em;
+    font-family: 'Cutive', serif;
+
+}
+
+.col-md-3 {
+    font-size: 1.25em;
+    font-family: 'Baloo', cursive;
+    padding-right: 0;
+}
+
+.col-md-5 {
+    font-size: 1.25em;
+    font-family: 'Ultra', serif;
+    padding-right: 0;
+}
+
+.col-md-6 {
+    font-size: 1.25em;
+    font-family: Helvetica;
+    padding-right: 0;
+}
+
+.heading {
+    font-size: 4em;
+}
+
+.submit {
+    background-color: black;
+    color: white;
+}
+
+#foodPlaces, #activities {
+    padding: 0;
+}
+
+.row {
+    padding-right: 0;
+    padding-left: 30px;
+}
+
+@media screen and (max-width: 736px){
+    .heading{
+        font-size: 1.75em;
+    }
+}
+
+/********************************************CSS for the Modal*******************************************/
+
+span {
+    font-size: 2em;
+}
+
+.modal-body img {
+    width: 50%;
+}
+
+.modal-body {
+    min-height: 50vh;
+}
+
+.modal-title {
+    text-align: center;
+    font-family: 'Cutive', serif;
+}
+
+#activityModal button {
+    font-family: 'Cutive', serif;
+}
+
+/************************************************Itinerary***********************************************/
+
+#map, .foodPlans, .activityPlans .changePlans {
+    height: 75vh;
+    float: right;
+}
+
+.activityPlans div, .foodPlans div {
+    height: 25vh;
+    border-bottom: .1em solid black;
+}
+
+.itineraryHeading {
+    height: 15vh;
+}
+
+.itineraryHeading h4:first-child {
+    font-family: 'Ultra', serif;
+}
+
+.foodAdded0 h4, .foodAdded1 h4, .foodAdded2 h4, .activityAdded0 h4, .activityAdded1 h4, .activityAdded2 h4, .changePlans h3 {
+    font-family: 'Baloo', cursive;
+}
+
+#weather h4:first-child {
+    font-family: 'Ultra', serif;
+}
+
+#weather h4 {
+    text-transform: capitalize;
+}
+
+.itineraryHeading, .itineraryHeading div {
+    padding: 0;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+/*************************************************Navigation***************************************************/
+
+#navigation {
+    text-align: center;
+}
+.previousPage, .nextPage {
+    margin-bottom: 1em;
+}
+
+.list-group-item span {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 1.5em;
+}
+
+/*************************************************Misc***************************************************/
+
+.modal-body .col-xs-6, .foodPlans, .activityPlans {
+    font-size: 1em;
+}
