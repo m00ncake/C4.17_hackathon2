@@ -13,9 +13,10 @@ app.use(cors());
 const clientId = 'MllA1nNpcp1kDteVg6OGUw';
 const clientSecret = 'h51cl79dh4tsMZFaUompKNZmY6fiZa3KpknZCalOCVXzZeiMY7HeuZ9UUDJKC8WS';
 
-app.use('/activities/:city', getActivityResults);
-app.use('/food/:city', getFoodResults);
 app.use(express.static(path.join(__dirname, 'client')));
+
+app.get('/activities/:city', getActivityResults);
+app.get('/food/:city', getFoodResults);
 
 function getActivityResults(req, res){
     yelp.accessToken(clientId, clientSecret).then(response => {
