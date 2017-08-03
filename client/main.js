@@ -37,7 +37,7 @@ function getThingsToDo(){
     $.ajax({
         method: 'get',
         dataType: 'json',
-        url: 'http://localhost:3000/activities/' + city,
+        url: 'http://daymaker.johntylermoon.com/activities/' + city,
         success: function (response){
             data = response;
             createResultsArrays(data);
