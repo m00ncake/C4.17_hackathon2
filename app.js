@@ -14,6 +14,7 @@ const clientSecret = 'h51cl79dh4tsMZFaUompKNZmY6fiZa3KpknZCalOCVXzZeiMY7HeuZ9UUD
 
 app.use('/activities/:city', getActivityResults);
 app.use('/food/:city', getFoodResults);
+app.use(express.static(path.join(__dirname, 'client')));
 
 function getActivityResults(req, res){
     yelp.accessToken(clientId, clientSecret).then(response => {
