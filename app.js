@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-
+const PORT = 3000;
 app.use(cors());
 
 // Place holders for Yelp Fusion's OAuth 2.0 credentials. Grab them
@@ -51,6 +51,6 @@ function getFoodResults(req, res){
     });
 }
 
-app.listen(3000, function(){
-    console.log('Running on port 3000');
+app.listen(PORT, function(){
+    console.log('Running on port ', PORT);
 });
