@@ -1,10 +1,28 @@
+body {
+    background: url('images/sunriseCity.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#landingPage {
+    background-color: white;
+    opacity: .9;
+}
+
+.errorMessage {
+    display: none;
+    color: red;
+}
+
 /***************************Applied to the Things to Do and Food & Drink pages***************************/
 
 .row div {
     border: .01em solid black;
     height: 14.28vh;
-    text-align: center;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .col-md-2 {
@@ -33,6 +51,9 @@
 
 .heading {
     font-size: 4em;
+    background-color: black;
+    color: white;
+    border: .01em solid white !important;
 }
 
 .submit {
@@ -47,6 +68,11 @@
 .row {
     padding-right: 0;
     padding-left: 30px;
+}
+
+#activities, #foodPlaces {
+    background-color: white;
+    opacity: .9;
 }
 
 @media screen and (max-width: 736px){
@@ -66,7 +92,8 @@ span {
 }
 
 .modal-body {
-    min-height: 50vh;
+    height: 50vh;
+    overflow: scroll;
 }
 
 .modal-title {
@@ -83,6 +110,11 @@ span {
 #map, .foodPlans, .activityPlans .changePlans {
     height: 75vh;
     float: right;
+}
+
+.activityPlans, .foodPlans, .changePlans, .activityPlans div, .foodPlans div, .changePlans div {
+    background-color: white;
+    opacity: .95;
 }
 
 .activityPlans div, .foodPlans div {
@@ -117,6 +149,13 @@ span {
 .strike {
     text-decoration: line-through;
 }
+
+#itinerary {
+    background-color: white;
+    opacity: .95;
+    height: 100vh;
+}
+
 /*************************************************Navigation***************************************************/
 
 #navigation {
@@ -133,8 +172,65 @@ span {
     font-size: 1.5em;
 }
 
-/*************************************************Misc***************************************************/
+/************************************* Media Queries & other responsive formatting ***************************/
 
 .modal-body .col-xs-6, .foodPlans, .activityPlans {
     font-size: 1em;
+}
+
+@media screen and (max-width: 415px) {
+    #activities div, #foodPlaces div{
+        background-color: white;
+        opacity: .9;
+    }
+
+    .foodPlans div {
+        height: 35vh;
+    }
+
+    .foodPlans {
+        height: auto;
+    }
+
+    .itineraryHeading {
+        height: 20vh;
+    }
+
+    .heading {
+        background-color: black !important;
+        color: white;
+        border: .01em solid white !important;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .foodPlans div {
+        height: 40vh;
+    }
+}
+
+@media screen and (max-width: 1160px){
+    .heading {
+        font-size: 3em;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .heading {
+        font-size: 2em;
+    }
+}
+
+/*********** Hover effects applied to activities, food, and itinerary page ***********/
+
+.onHover:hover {
+    background-color: #eee;
+}
+
+.pointer:hover {
+    color: darkgrey;
+}
+
+.nav-tabs:hover, .pointer:hover, .onHover:hover {
+    cursor: pointer;
 }

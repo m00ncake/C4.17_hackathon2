@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cutive" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styleTwo.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="mainTwo.js"></script>
+    <script src="main.js"></script>
 </head>
 <body>
 
@@ -22,18 +22,17 @@
 <!-------------------------------------->
 
 <section id="landingPage">
-    <div class="container col-md-offset-2 col-md-8">
+    <div class="container-fluid col-md-offset-2 col-md-8">
         <div class="jumbotron">
             <h1>DayMakr</h1>
             <p>Curate a day trip with DayMakr. Have fun and explore!!!</p>
-            <form>
-                <div class="form-group">
-                    <div class="form-group-row">
-                        <input id="city-input" class="form-control input-lg" type="text" placeholder="Enter Location - Irvine, CA">
-                    </div>
-                </div>
-                <button type="button" id="submit-btn" class="submit btn btn-lg">Submit</button>
+            <form class="input-group">
+                <input id="city-input" class="form-control input-lg" type="text" placeholder="Enter Location - Irvine, CA">
+                <span class="input-group-btn">
+                    <button type="button" id="submit-btn" class="submit btn btn-lg">Submit</button>
+                </span>
             </form>
+            <p class="errorMessage">Please enter a valid U.S. city.</p>
         </div>
     </div>
 </section>
@@ -42,7 +41,7 @@
 <!--------------Navigation-------------->
 <!-------------------------------------->
 
-<section id="navigation" class="col-md-2">
+<section id="navigation" class="col-xs-12 col-md-2">
     <h3 class="theCity"></h3>
     <button class="previousPage btn btn-default">Back</button>
     <button class="nextPage btn btn-default">Next</button>
@@ -56,7 +55,7 @@
 <!-------------------------------------->
 
 <!--<section id="activities" class="col-md-offset-2 col-md-8">-->
-<section id="activities" class="col-md-8">
+<section id="activities" class="container-fluid col-xs-12 col-md-8">
     <div class="row col-xs-12 col-md-12">
         <div class="heading col-xs-6 col-md-6">Things To Do</div>
         <div class="heading activityItems col-xs-6 col-md-6">Pick 3 Items</div>
@@ -64,34 +63,34 @@
     <div class="row col-xs-12 col-md-12">
         <div class="activity0 col-xs-6 col-md-3"></div>
         <div class="activity1 col-xs-6 col-md-3"></div>
-        <div class="activity2 col-xs-6 col-md-3"></div>
-        <div class="activity3 col-xs-6 col-md-3"></div>
+        <div class="activity2 col-xs-12 col-md-3"></div>
+        <div class="activity3 col-xs-12 col-md-3"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="activity4 col-xs-12 col-md-5"></div>
-        <div class="activity5 col-xs-4 col-md-2"></div>
-        <div class="activity6 col-xs-8 col-md-5"></div>
+        <div class="activity4 col-xs-6 col-md-5"></div>
+        <div class="activity5 col-xs-6 col-md-2"></div>
+        <div class="activity6 col-xs-12 col-md-5"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="activity7 col-xs-6 col-md-3"></div>
+        <div class="activity7 col-xs-12 col-md-3"></div>
         <div class="activity8 col-xs-6 col-md-3"></div>
         <div class="activity9 col-xs-6 col-md-3"></div>
-        <div class="activity10 col-xs-6 col-md-3"></div>
+        <div class="activity10 col-xs-12 col-md-3"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
         <div class="activity11 col-xs-12 col-md-5"></div>
-        <div class="activity12 col-xs-8 col-md-2"></div>
-        <div class="activity13 col-xs-4 col-md-5"></div>
+        <div class="activity12 col-xs-6 col-md-2"></div>
+        <div class="activity13 col-xs-6 col-md-5"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="activity14 col-xs-6 col-md-3"></div>
-        <div class="activity15 col-xs-6 col-md-3"></div>
+        <div class="activity14 col-xs-12 col-md-3"></div>
+        <div class="activity15 col-xs-12 col-md-3"></div>
         <div class="activity16 col-xs-6 col-md-3"></div>
         <div class="activity17 col-xs-6 col-md-3"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="activity18 col-xs-6 col-md-6"></div>
-        <div class="activity19 col-xs-6 col-md-6"></div>
+        <div class="activity18 col-xs-12 col-md-6"></div>
+        <div class="activity19 col-xs-12 col-md-6"></div>
     </div>
 </section>
 
@@ -100,7 +99,7 @@
 <!-------------------------------------->
 
 <!--<section id="foodPlaces" class="col-md-offset-2 col-md-8">-->
-<section id="foodPlaces" class="col-md-8">
+<section id="foodPlaces" class="container-fluid col-xs-12 col-md-8">
     <div class="row col-xs-12 col-md-12">
         <div class="heading col-xs-6 col-md-6">Food & Drink</div>
         <div class="heading foodItems col-xs-6 col-md-6">Pick 3 Items</div>
@@ -108,34 +107,34 @@
     <div class="row col-xs-12 col-md-12">
         <div class="food0 col-xs-6 col-md-3"></div>
         <div class="food1 col-xs-6 col-md-3"></div>
-        <div class="food2 col-xs-6 col-md-3"></div>
-        <div class="food3 col-xs-6 col-md-3"></div>
+        <div class="food2 col-xs-12 col-md-3"></div>
+        <div class="food3 col-xs-12 col-md-3"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="food4 col-xs-12 col-md-5"></div>
-        <div class="food5 col-xs-4 col-md-2"></div>
-        <div class="food6 col-xs-8 col-md-5"></div>
+        <div class="food4 col-xs-6 col-md-5"></div>
+        <div class="food5 col-xs-6 col-md-2"></div>
+        <div class="food6 col-xs-12 col-md-5"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="food7 col-xs-6 col-md-3"></div>
+        <div class="food7 col-xs-12 col-md-3"></div>
         <div class="food8 col-xs-6 col-md-3"></div>
         <div class="food9 col-xs-6 col-md-3"></div>
-        <div class="food10 col-xs-6 col-md-3"></div>
+        <div class="food10 col-xs-12 col-md-3"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
         <div class="food11 col-xs-12 col-md-5"></div>
-        <div class="food12 col-xs-8 col-md-2"></div>
-        <div class="food13 col-xs-4 col-md-5"></div>
+        <div class="food12 col-xs-6 col-md-2"></div>
+        <div class="food13 col-xs-6 col-md-5"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="food14 col-xs-6 col-md-3"></div>
-        <div class="food15 col-xs-6 col-md-3"></div>
+        <div class="food14 col-xs-12 col-md-3"></div>
+        <div class="food15 col-xs-12 col-md-3"></div>
         <div class="food16 col-xs-6 col-md-3"></div>
         <div class="food17 col-xs-6 col-md-3"></div>
     </div>
     <div class="row col-xs-12 col-md-12">
-        <div class="food18 col-xs-6 col-md-6"></div>
-        <div class="food19 col-xs-6 col-md-6"></div>
+        <div class="food18 col-xs-12 col-md-6"></div>
+        <div class="food19 col-xs-12 col-md-6"></div>
     </div>
 </section>
 
@@ -143,14 +142,14 @@
 <!--------------Itinerary--------------->
 <!-------------------------------------->
 
-<section id="itinerary" class="col-md-offset-2 col-md-8">
+<section id="itinerary" class="container-fluid col-md-offset-2 col-md-8">
     <div class="itineraryHeading col-xs-12">
         <div class="col-xs-6">
             <h4>Itinerary</h4>
             <h4 class="city"></h4>
             <h4 class="date"></h4>
         </div>
-        <div id="weather" class=" col-xs-6 text-right">
+        <div id="weather" class="col-xs-6 text-right">
             <h4>Weather</h4>
             <h4 class="weatherDescription"></h4>
             <h4 class="weatherDegrees"></h4>
@@ -173,9 +172,9 @@
         <div class="foodAdded2"></div>
     </div>
     <div class="changePlans col-xs-12 col-md-6">
-        <h3 class="changeCity">Change City</h3>
-        <h3 class="changeActivities">Change Activities</h3>
-        <h3 class="changeFood">Change Food</h3>
+        <h3 class="changeCity pointer">Change City</h3>
+        <h3 class="changeActivities pointer">Change Activities</h3>
+        <h3 class="changeFood pointer">Change Food</h3>
     </div>
 </section>
 
@@ -199,7 +198,7 @@
 </div>
 
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyD3E8xIkLacvLRU2KsefizVXU2AyisefcU&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyD3E8xIkLacvLRU2KsefizVXU2AyisefcU&libraries=places&callback=initMap">
 </script>
 
 </body>

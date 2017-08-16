@@ -2,15 +2,18 @@
 const yelp = require('yelp-fusion');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
-
+const PORT = 3000;
 app.use(cors());
 
 // Place holders for Yelp Fusion's OAuth 2.0 credentials. Grab them
 // from https://www.yelp.com/developers/v3/manage_app
 const clientId = 'MllA1nNpcp1kDteVg6OGUw';
 const clientSecret = 'h51cl79dh4tsMZFaUompKNZmY6fiZa3KpknZCalOCVXzZeiMY7HeuZ9UUDJKC8WS';
+
+app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/activities/:city', getActivityResults);
 app.use('/food/:city', getFoodResults);
@@ -51,6 +54,6 @@ function getFoodResults(req, res){
     });
 }
 
-app.listen(3000, function(){
-    console.log('Running on port 3000');
+app.listen(PORT, function(){
+    console.log('Running on port', PORT);
 });

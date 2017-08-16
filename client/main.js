@@ -4,10 +4,15 @@ var activityPlaces = 0;
 var foodPlaces = 0;
 
 /**
- ** Function that makes the api calls once the user selects a city.
+ ** Function that makes the api calls once the user selects a city. Takes the user to the
+ ** activities results page.
  **/
 
 function makeApiCalls(){
+    if($("#city-input").val() === ''){
+        showError();
+        return;
+    }
     getThingsToDo();
     getWeather();
     $(".theCity").text($("#city-input").val());
@@ -17,7 +22,27 @@ function makeApiCalls(){
 }
 
 /**
- ** Api call made to yelp for Things To Do in the selected city. On success the getFoodSpots and displayActivityResults is called.
+ ** The two functions below handle user input error. Accounts for no city entered or an invalid city entered.
+ **/
+
+function showError(){
+    $(".errorMessage").show();
+    setTimeout(function(){
+        $(".errorMessage").hide();
+    }, 2000);
+}
+
+function enterValidCity(){
+    $("#navigation").hide();
+    $("#activities").hide();
+    $("#landingPage").show();
+    showError();
+    $("#city-input").val('');
+}
+
+/**
+ ** Api call made to yelp for Things To Do in the selected city. On success
+ ** the getFoodSpots and displayActivityResults is called.
  **/
 
 function getThingsToDo() {
@@ -25,13 +50,14 @@ function getThingsToDo() {
     $.ajax({
         method: 'get',
         dataType: 'json',
-        url: 'http://localhost:3000/activities/' + city,
+        url: 'http://daymaker.jonathanlimtiaco.com/activities/' + city,
         success: function (response){
             displayActivityResults(response);
             getFoodSpots();
         },
         error: function (response){
             console.log(response);
+            enterValidCity();
         }
     });
 }
@@ -45,7 +71,7 @@ function getFoodSpots() {
     $.ajax({
         method:'get',
         dataType: 'json',
-        url: 'http://localhost:3000/food/' + city,
+        url: 'http://daymaker.jonathanlimtiaco.com/food/' + city,
         success: function (response) {
             displayFoodResults(response);
         },
@@ -77,6 +103,7 @@ function getWeather(){
         },
         error: function(response){
             console.log(response);
+            enterValidCity();
         }
     });
 }
@@ -418,7 +445,7 @@ function togglePlans(){
 }
 
 /**
- ******************** Gets called when user push the 'Change City' on the edit itinerary tab of the Itinerary page.
+ ** Gets called when user push the 'Change City' on the edit itinerary tab of the Itinerary page.
  **/
 
 function changeCity(){
@@ -426,10 +453,11 @@ function changeCity(){
     $("#itinerary").hide();
     $('#city-input').val('');
     resetAll();
+    clearInfo();
 }
 
 /**
- ******************** Gets called when user push the 'Change Activities' on the edit itinerary tab of the Itinerary page.
+ ** Gets called when user push the 'Change Activities' on the edit itinerary tab of the Itinerary page.
  **/
 
 function changeActivities(){
@@ -440,7 +468,7 @@ function changeActivities(){
 }
 
 /**
- ******************** Gets called when user push the 'Change Food' on the edit itinerary tab of the Itinerary page.
+ ** Gets called when user push the 'Change Food' on the edit itinerary tab of the Itinerary page.
  **/
 
 function changeFood(){
@@ -462,7 +490,7 @@ function changeFood(){
 }
 
 /**
- ******************** Gets called when user push the 'next' button **********************
+ ** Gets called when user push the 'next' button
  **/
 
 function nextPage(){
@@ -485,6 +513,7 @@ function nextPage(){
         $("#landingPage").show();
         $("#city-input").val('');
         changeBackground();
+        clearInfo();
     }
 }
 
@@ -500,6 +529,7 @@ function previousPage(){
         $("#navigation").hide();
         $("#city-input").val('');
         changeBackground();
+        clearInfo();
     }else{
         resetAll();
         $("#activities").show();
@@ -509,7 +539,7 @@ function previousPage(){
 }
 
 /**
- ******************** Gets called when user wants to create a new itinerary **********************
+ ** Gets called when user wants to create a new itinerary
  **/
 
 function resetAll(){
@@ -529,7 +559,7 @@ function resetAll(){
 }
 
 /**
- ******************** Gets called whenever the page changes and changes background image. **********************
+ ** Gets called whenever the page changes and changes background image.
  **/
 
 function changeBackground(){
@@ -587,6 +617,10 @@ function initMap() {
         google.maps.event.removeListener(listener);
     });
 }
+
+/**
+ ****************** Creates info information for the google map markers ********************
+ **/
 
 function populateInfoWindow(marker, infowindow){
     if(infowindow.marker != marker){
@@ -695,6 +729,30 @@ var styles = [
     }
 ];
 
+/**
+ ****************** Google auto-complete feature for city input ********************
+ **/
+
+function autoComplete(){
+    var input = document.getElementById('city-input');
+    var options = {
+        types: ['(cities)'],
+        componentRestrictions: {country: 'us'}
+    };
+    new google.maps.places.Autocomplete(input, options);
+}
+
+/**
+ **************** Clears the activities and food grid of previous information *******
+ **/
+
+function clearInfo(){
+    for(var i = 0; i < 20; i++){
+        $(".activity" + i).text("");
+        $(".food" + i).text("");
+    }
+}
+
 $(document).ready(function(){
     $("#navigation").hide();
     $("#activities").hide();
@@ -707,4 +765,5 @@ $(document).ready(function(){
     $(".changeFood").click(changeFood);
     $(".nextPage").click(nextPage);
     $(".previousPage").click(previousPage);
+    autoComplete();
 });
